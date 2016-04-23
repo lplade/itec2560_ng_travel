@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Travel Wish List</title>
+</head>
+<body>
+<div ng-app="travelApp" ng-controller="placesController" ng-init="loadPlaces()">
+	<h2>Add new place</h2>
+	<form>
+		<label>Place <input type="text" ng-model="name"></label>
+		<label>Country <input type="text" ng-model="country"></label>
+		<input type="submit" value="Add Place" ng-click="addNewPlace(name, country)">
+	</form>
+	<h2>Your travel wish list</h2>
+
+	<ul>
+		<li ng-repeat="place in places | filter:{visited:false}">
+			<label>{{ place.name }} in {{ place.country }}
+				<input type="checkbox" ng-click="visited(place)">
+			</label>
+		</li>
+	</ul>
+	<h2>Where you've been</h2>
+
+	<ul>
+		<li ng-repeat="place in places | filter:{visited:true}">
+			<span>({ place.name )} in {{ place.country }}</span>
+		</li>
+	</ul>
+</div>
+
+
+</body>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
+<script src="javascripts/angular/travelApp.js"></script>
+<script src="javascripts/angular/controllers/placesController.js"></script>
+</html>
