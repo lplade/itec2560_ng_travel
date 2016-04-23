@@ -3,6 +3,13 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Travel Wish List</title>
+
+
+  <!--scripts-->
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
+  <script src="javascripts/angular/travelApp.js"></script>
+  <script src="javascripts/angular/controllers/placesController.js"></script>
+
 </head>
 <body>
 <div ng-app="travelApp" ng-controller="placesController" ng-init="loadPlaces()">
@@ -14,7 +21,10 @@
 	</form>
 	<h2>Your travel wish list</h2>
 
-	<ul>
+  <!--A list of where you want to go, and a list of where you've been.
+   Notice that both lists have the same model but they are filtered on
+   whether you've visited this place or not. -->
+  <ul ng-cloak>
 		<li ng-repeat="place in places | filter:{visited:false}">
 			<label>{{ place.name }} in {{ place.country }}
 				<input type="checkbox" ng-click="visited(place)">
@@ -23,16 +33,15 @@
 	</ul>
 	<h2>Where you've been</h2>
 
-	<ul>
+  <!-- The li ng-repeat directive is the same as previous list.
+  Here, just display name, don't need checkbox. -->
+  <ul ng-cloak>
 		<li ng-repeat="place in places | filter:{visited:true}">
-			<span>({ place.name )} in {{ place.country }}</span>
+      <span>{{ place.name }} in {{ place.country }}</span>
 		</li>
 	</ul>
 </div>
 
 
 </body>
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
-<script src="javascripts/angular/travelApp.js"></script>
-<script src="javascripts/angular/controllers/placesController.js"></script>
 </html>

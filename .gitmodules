@@ -1,0 +1,3 @@
+[submodule "HelloMEAN-TravelWishList"]
+	path = HelloMEAN-TravelWishList
+	url = git@github.com:minneapolis-edu/HelloMEAN-TravelWishList.git
