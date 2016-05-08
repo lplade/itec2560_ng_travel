@@ -39,6 +39,17 @@ app.controller('placesController', ['$scope', '$http', function ($scope, $http) 
 			})
 	};
 
+
+	$scope.removePlace = function (placeX) {
+		$http.post('/places/deletePlace', {name: placeX})
+			.success(function (data, status, headers, config) {
+				$scope.loadPlaces();
+			})
+			.error(function (data, status, headers, config) {
+				console.log('error deleting place ' + placeX)
+			});
+	};
+
 	$scope.visited = function (placeVisited) {
 
 		console.log('visited function');
