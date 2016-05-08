@@ -5,10 +5,11 @@
 	<title>Travel Wish List</title>
 
 
-  <!--scripts-->
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
-  <script src="javascripts/angular/travelApp.js"></script>
-  <script src="javascripts/angular/controllers/placesController.js"></script>
+	<!--scripts-->
+	<script
+		src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
+	<script src="javascripts/angular/travelApp.js"></script>
+	<script src="javascripts/angular/controllers/placesController.js"></script>
 
 </head>
 <body>
@@ -17,29 +18,36 @@
 	<form>
 		<label>Place <input type="text" ng-model="name"></label>
 		<label>Country <input type="text" ng-model="country"></label>
-		<input type="submit" value="Add Place" ng-click="addNewPlace(name, country)">
+		<input type="submit" value="Add Place"
+		       ng-click="addNewPlace(name, country)">
 	</form>
+
 	<h2>Your travel wish list</h2>
 
-  <!--A list of where you want to go, and a list of where you've been.
-   Notice that both lists have the same model but they are filtered on
-   whether you've visited this place or not. -->
-  <ul ng-cloak>
-		<li ng-repeat="place in places | filter:{visited:false}">
+	<!--A list of where you want to go, and a list of where you've been.
+	 Notice that both lists have the same model but they are filtered on
+	 whether you've visited this place or not. -->
+	<ul ng-cloak>
+		<li ng-repeat="place in unvisitedPlaces = (places | filter:{visited:false})">
 			<label>{{ place.name }} in {{ place.country }}
 				<input type="checkbox" ng-click="visited(place)">
 			</label>
 		</li>
 	</ul>
+	<!--Inspired by http://stackoverflow.com/a/18593018 - slick solution-->
+	<p ng-hide="unvisitedPlaces.length">(No items on the list!)</p>
+
 	<h2>Where you've been</h2>
 
-  <!-- The li ng-repeat directive is the same as previous list.
-  Here, just display name, don't need checkbox. -->
-  <ul ng-cloak>
-		<li ng-repeat="place in places | filter:{visited:true}">
-      <span>{{ place.name }} in {{ place.country }}</span>
+	<!-- The li ng-repeat directive is the same as previous list.
+	Here, just display name, don't need checkbox. -->
+	<ul ng-cloak>
+		<li ng-repeat="place in visitedPlaces = (places | filter:{visited:true})">
+			<span>{{ place.name }} in {{ place.country }}</span>
 		</li>
 	</ul>
+	<p ng-hide="visitedPlaces.length">(No items on the list!)</p>
+
 </div>
 
 
